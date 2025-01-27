@@ -1,0 +1,170 @@
+#533-k Blink, Brightness code
+
+import time
+import random
+from adafruit_circuitplayground.express import cpx
+import neopixel
+import board
+import gc
+
+pixel_pin = board.A6
+num_pixels = 192
+pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False)
+
+BLUE = (0x0000ff)
+CYAN = (0x00ffff)
+BLACK = 000000
+
+lidopen_pixels = [21, 22, 23, 24, 25, 26, 35, 36, 43, 44, 50, 61, 65, 78, 80, 95, 96, 111, 113, 126, 130, 141, 147, 148, 155, 156, 165, 166, 167, 168, 169, 170]
+def lidopen():
+    for n in lidopen_pixels:
+        pixels[n] = BLUE
+
+lidblink1_pixels = [37, 38, 39, 40, 41, 42, 51, 52, 59, 60, 66, 77, 81, 95, 96, 111, 113, 126, 130, 141, 147, 148, 155, 156, 165, 166, 167, 168, 169, 170]
+def lidblink1():
+    for n in lidblink1_pixels:
+        pixels[n] = BLUE
+lidblink2_pixels = [53, 54, 55, 56, 57, 58, 67, 68, 75, 76, 81, 82, 93, 94, 96, 111, 113, 126, 130, 141, 147, 148, 155, 156, 165, 166, 167, 168, 169, 170]
+def lidblink2():
+    for n in lidblink2_pixels:
+        pixels[n] = BLUE
+lidblink3_pixels = [68, 69, 70, 71, 72, 73, 74, 75, 82, 83, 92, 93, 96, 97, 110, 111, 113, 126, 130, 131, 140, 141, 148, 149, 150, 151, 152, 153, 154, 155]
+def lidblink3():
+    for n in lidblink3_pixels:
+        pixels[n] = BLUE
+lidblink4_pixels = [84, 85, 86, 87, 88, 89, 90, 91, 96, 97, 98, 99, 108, 109, 110, 111, 113, 126, 130, 131, 140, 141, 148, 149, 150, 151, 152, 153, 154, 155]
+def lidblink4():
+    for n in lidblink4_pixels:
+        pixels[n] = BLUE
+lidblink5_pixels = [96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 114, 115, 124, 125, 132, 133, 134, 135, 136, 137, 138, 139]
+def lidblink5():
+    for n in lidblink5_pixels:
+        pixels[n] = BLUE
+lidblink6_pixels = [96, 97, 98, 109, 110, 111, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 132, 133, 134, 135, 136, 137, 138, 139]
+def lidblink6():
+    for n in lidblink6_pixels:
+        pixels[n] = BLUE
+lidblink7_pixels = [96, 97, 110, 111, 114, 115, 124, 125, 132, 133, 134, 135, 136, 137, 138, 139]
+def lidblink7():
+    for n in lidblink7_pixels:
+        pixels[n] = BLUE
+
+irisopen_pixels = [55, 56, 70, 71, 72, 73, 86, 87, 88, 89, 102, 103, 104, 105, 118, 119, 120, 121, 135, 136]
+def irisopen():
+    for n in irisopen_pixels:
+        pixels[n] = CYAN
+
+irisblink2_pixels = [70, 71, 72, 73, 86, 87, 88, 89, 102, 103, 104, 105, 118, 119, 120, 121, 135, 136]
+def irisblink2():
+    for n in irisblink2_pixels:
+        pixels[n] = CYAN
+irisblink3_pixels = [86, 87, 88, 89, 102, 103, 104, 105, 118, 119, 120, 121, 135, 136]
+def irisblink3():
+    for n in irisblink3_pixels:
+        pixels[n] = CYAN
+irisblink4_pixels = [102, 103, 104, 105, 118, 119, 120, 121, 135, 136]
+def irisblink4():
+    for n in irisblink4_pixels:
+        pixels[n] = CYAN
+irisblink5_pixels = [118, 119, 120, 121]
+def irisblink5():
+    for n in irisblink5_pixels:
+        pixels[n] = CYAN
+
+irissr1_pixels = [56, 57, 69, 70 ,71, 72, 87, 88, 89, 90, 101, 102, 103, 104, 119, 120, 121, 122, 134, 135]
+def irissr1():
+    for n in irissr1_pixels:
+        pixels[n] = CYAN
+irissr2_pixels = [57, 58, 68, 69, 70, 71, 88, 89, 90, 91, 100, 101, 102, 103, 120, 121, 122, 123, 133, 134]
+def irissr2():
+    for n in irissr2_pixels:
+        pixels[n] = CYAN
+irissr3_pixels = [58, 59, 67, 68, 69, 70, 89, 90, 91, 92, 99, 100, 101, 102, 121, 122, 123, 124, 132, 133]
+def irissr3():
+    for n in irissr3_pixels:
+        pixels[n] = CYAN
+irissr4_pixels = [59, 60, 66, 67, 68, 69, 90, 91, 92, 93, 98, 99, 100, 101, 122, 123, 124, 125, 131, 132]
+def irissr4():
+    for n in irissr4_pixels:
+        pixels[n] = CYAN
+
+while True:
+    lidopen()
+    irisopen()
+    openpause = random.randrange(3,15)
+    pixels.brightness = .15
+    if cpx.light < 40:
+        pixels.brightness = .02
+    elif cpx.light > 300:
+        pixels.brightness = 1
+    pixels.show()
+    print("Light:", cpx.light)
+    print("Bright:", pixels.brightness)
+    pixels.show()
+    time.sleep(openpause)
+    pixels.fill(BLACK)
+    gc.collect()
+    lidblink1()
+    irisopen()
+    pixels.show()
+    time.sleep(.02)
+    pixels.fill(BLACK)
+    lidblink2()
+    irisblink2()
+    pixels.show()
+    time.sleep(.02)
+    pixels.fill(BLACK)
+    lidblink3()
+    irisblink3()
+    pixels.show()
+    time.sleep(.02)
+    pixels.fill(BLACK)
+    lidblink4()
+    irisblink4()
+    pixels.show()
+    time.sleep(.02)
+    pixels.fill(BLACK)
+    lidblink5()
+    irisblink5()
+    pixels.show()
+    time.sleep(.02)
+    pixels.fill(BLACK)
+    lidblink6()
+    pixels.show()
+    time.sleep(.02)
+    pixels.fill(BLACK)
+    lidblink7()
+    pixels.show()
+    time.sleep(.04)
+    pixels.fill(BLACK)
+    lidblink6()
+    pixels.show()
+    time.sleep(.02)
+    pixels.fill(BLACK)
+    lidblink5()
+    irisblink5()
+    pixels.show()
+    time.sleep(.02)
+    pixels.fill(BLACK)
+    lidblink4()
+    irisblink4()
+    pixels.show()
+    time.sleep(.02)
+    pixels.fill(BLACK)
+    lidblink3()
+    irisblink3()
+    pixels.show()
+    time.sleep(.02)
+    pixels.fill(BLACK)
+    lidblink2()
+    irisblink2()
+    pixels.show()
+    time.sleep(.02)
+    pixels.fill(BLACK)
+    lidblink1()
+    irisopen()
+    pixels.show()
+    time.sleep(.02)
+    pixels.fill(BLACK)
+    gc.collect()
+
