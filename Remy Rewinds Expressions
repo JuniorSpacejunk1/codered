@@ -1,0 +1,208 @@
+# Remy Rewind's Expressions
+import time
+import digitalio
+import board
+import keypad
+import neopixel
+
+KEY_PINS = (
+    board.D11,
+    board.D9,
+    board.D13,
+    board.D12,
+)
+
+keys = keypad.Keys(KEY_PINS, value_when_pressed=False, pull=True)
+
+pixel_pin = board.A0
+num_pixels = 99
+pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=.8, auto_write=False)
+
+BLUE = ((0, 0, 255))
+RED = ((255, 0, 0))
+YELLOW = ((255, 255, 0))
+PINK = ((255, 0, 20))
+BLACK = 000000
+
+neutral_pixels = [20, 21, 22, 26, 27, 28, 33, 34, 35, 39, 40, 41, 46, 47, 48, 52, 53, 54, 59, 60, 61, 65, 66, 67, 71, 72, 73, 77, 78, 79, 82, 83, 84, 88, 89, 90]
+def neutral():
+    for n in neutral_pixels:
+        pixels[n] = BLUE
+
+blink1_pixels = [32, 33, 34, 35, 36, 38, 39, 40, 41, 42, 46, 47, 48, 52, 53, 54, 59, 60, 61, 65, 66, 67, 71, 72, 73, 77, 78, 79, 82, 83, 84, 88, 89, 90]
+def blink1():
+    for n in blink1_pixels:
+        pixels[n] = BLUE
+blink2_pixels = [45, 46, 47, 48, 49, 51, 52, 53, 54, 55, 59, 60, 61, 65, 66, 67, 71, 72, 73, 77, 78, 79, 82, 83, 84, 88, 89, 90]
+def blink2():
+    for n in blink2_pixels:
+        pixels[n] = BLUE
+blink3_pixels = [58, 59, 60, 61, 62, 64, 65, 66, 67, 68, 71, 72, 73, 77, 78, 79]
+def blink3():
+    for n in blink3_pixels:
+        pixels[n] = BLUE
+blink4_pixels = [70, 71, 72, 73, 74, 76, 77, 78, 79, 80]
+def blink4():
+    for n in blink4_pixels:
+        pixels[n] = BLUE
+
+anger_pixels = [19, 20, 28, 29, 33, 34, 40, 41, 46, 47, 48, 52, 53, 54, 59, 60, 61, 62, 64, 65, 66, 67, 71, 72, 73, 77, 78, 79, 82, 83, 84, 88, 89, 90]
+def anger():
+    for n in anger_pixels:
+        pixels[n] = RED
+
+exclamation_pixels = [2, 3, 4, 11, 12, 13, 23, 24, 25, 36, 37, 38, 49, 50, 51, 62, 63, 64, 85, 86, 87, 94, 95, 96]
+def exclamation():
+    for n in exclamation_pixels:
+        pixels[n] = YELLOW
+
+heart1_pixels = [95]
+def heart1():
+    for n in heart1_pixels:
+        pixels[n] = PINK
+heart2_pixels = [95, 85, 87]
+def heart2():
+    for n in heart2_pixels:
+        pixels[n] = PINK
+heart3_pixels = [95, 85, 87, 72, 78]
+def heart3():
+    for n in heart3_pixels:
+        pixels[n] = PINK
+heart4_pixels = [95, 85, 87, 72, 78, 59, 67]
+def heart4():
+    for n in heart4_pixels:
+        pixels[n] = PINK
+heart5_pixels = [95, 85, 87, 72, 78, 59, 67, 55, 45]
+def heart5():
+    for n in heart5_pixels:
+        pixels[n] = PINK
+heart6_pixels = [95, 85, 87, 72, 78, 59, 67, 55, 45, 31, 43]
+def heart6():
+    for n in heart6_pixels:
+        pixels[n] = PINK
+heart7_pixels = [95, 85, 87, 72, 78, 59, 67, 55, 45, 31, 43, 18, 30]
+def heart7():
+    for n in heart7_pixels:
+        pixels[n] = PINK
+heart8_pixels = [95, 85, 87, 72, 78, 59, 67, 55, 45, 31, 43, 18, 30, 7, 8, 16, 17]
+def heart8():
+    for n in heart8_pixels:
+        pixels[n] = PINK
+heart9_pixels = [95, 85, 87, 72, 78, 59, 67, 55, 45, 31, 43, 18, 30, 7, 8, 16, 17, 27, 26, 21, 22]
+def heart9():
+    for n in heart9_pixels:
+        pixels[n] = PINK
+heart10_pixels = [95, 85, 87, 72, 78, 59, 67, 55, 45, 31, 43, 18, 30, 7, 8, 16, 17, 27, 26, 21, 22, 36, 38]
+def heart10():
+    for n in heart10_pixels:
+        pixels[n] = PINK
+heart11_pixels = [95, 85, 87, 72, 78, 59, 67, 55, 45, 31, 43, 18, 30, 7, 8, 16, 17, 27, 26, 21, 22, 36, 38, 50]
+def heart11():
+    for n in heart11_pixels:
+        pixels[n] = PINK
+
+while True:
+    event = keys.events.get()
+    if event:
+        print(event)
+        key_number = event.key_number
+        if key_number == 0:
+            if event.pressed:
+                pixels.fill(BLACK)
+                blink1()
+                pixels.show()
+                time.sleep(.02)
+                pixels.fill(BLACK)
+                blink2()
+                pixels.show()
+                time.sleep(.02)
+                pixels.fill(BLACK)
+                blink3()
+                pixels.show()
+                time.sleep(.02)
+                pixels.fill(BLACK)
+                blink4()
+                pixels.show()
+            if event.released:
+                pixels.fill(BLACK)
+                blink3()
+                pixels.show()
+                time.sleep(.02)
+                pixels.fill(BLACK)
+                blink2()
+                pixels.show()
+                time.sleep(.02)
+                pixels.fill(BLACK)
+                blink1()
+                pixels.show()
+                time.sleep(.02)
+                pixels.fill(BLACK)
+                neutral()
+                pixels.show()
+        if key_number == 1:
+            if event.pressed:
+                pixels.fill(BLACK)
+                anger()
+                pixels.show()
+            if event.released:
+                pixels.fill(BLACK)
+                neutral()
+                pixels.show()
+        if key_number == 2:
+            if event.pressed:
+                pixels.fill(BLACK)
+                exclamation()
+                pixels.show()
+            if event.released:
+                pixels.fill(BLACK)
+                neutral()
+                pixels.show()
+        if key_number == 3:
+            if event.pressed:
+                pixels.fill(BLACK)
+                heart1()
+                pixels.show()
+                time.sleep(.03)
+                pixels.fill(BLACK)
+                heart2()
+                pixels.show()
+                time.sleep(.03)
+                pixels.fill(BLACK)
+                heart3()
+                pixels.show()
+                time.sleep(.03)
+                pixels.fill(BLACK)
+                heart4()
+                pixels.show()
+                time.sleep(.03)
+                pixels.fill(BLACK)
+                heart5()
+                pixels.show()
+                time.sleep(.03)
+                pixels.fill(BLACK)
+                heart6()
+                pixels.show()
+                time.sleep(.03)
+                pixels.fill(BLACK)
+                heart7()
+                pixels.show()
+                time.sleep(.03)
+                pixels.fill(BLACK)
+                heart8()
+                pixels.show()
+                time.sleep(.03)
+                pixels.fill(BLACK)
+                heart9()
+                pixels.show()
+                time.sleep(.03)
+                pixels.fill(BLACK)
+                heart10()
+                pixels.show()
+                time.sleep(.03)
+                pixels.fill(BLACK)
+                heart11()
+                pixels.show()
+            if event.released:
+                pixels.fill(BLACK)
+                neutral()
+                pixels.show()
